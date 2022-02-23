@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- view of the Wizard Form -->
+    <record id="jt_lead_task_wizard_form" model="ir.ui.view">
+        <field name="name">jt.lead.task.wizard.form</field>
+        <field name="model">jt.lead.task.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Task">
+                <group>
+                    <field name="project_id" />
+                </group>
+                <footer>
+                    <button type="object" name="add_lead_task" string="Create Task" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <!-- action of converting, via wizard -->
+    <record id="jt_lead_task_wizard_add_task" model="ir.actions.act_window">
+        <field name="name">Create task from lead</field>
+        <field name="res_model">jt.lead.task.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
