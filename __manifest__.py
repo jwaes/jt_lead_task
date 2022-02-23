@@ -6,7 +6,7 @@
 
     'description': "",
 
-    'author': "jaco",
+    'author': "jaco tech",
     'website': "https://jaco.tech",
 
     # Categories can be used to filter modules in modules listing
