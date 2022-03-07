@@ -6,6 +6,7 @@ _logger = logging.getLogger(__name__)
 
 class CrmLeadTaskWizard(models.TransientModel):
     _name = 'jt.lead.task.wizard'
+    _description = 'Wizard to creat Lead Tasks'
 
     @api.model
     def default_get(self, fields):
