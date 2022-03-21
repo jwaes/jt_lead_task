@@ -26,6 +26,23 @@ class CrmLeadTaskWizard(models.TransientModel):
     project_id = fields.Many2one(
         comodel_name="project.project", string="Project", default=default_project_id)
 
+    def add_lead_task_and_go(self):
+        task = self.add_lead_task()
+
+        # return to task view
+        view = self.env.ref("project.view_task_form2")
+        _logger.info("View is %s", view)
+        return {
+            "name": "Task created",
+            "view_mode": "form",
+            "view_id": view.id,
+            "res_model": "project.task",
+            "type": "ir.actions.act_window",
+            "res_id": task.id,
+            "context": self.env.context,
+        }        
+
+
     def add_lead_task(self):
         _logger.info("about to add a lead task from wizard")
         self.ensure_one()
@@ -50,7 +67,7 @@ class CrmLeadTaskWizard(models.TransientModel):
         task = self.env["project.task"].create(vals)
 
         # add chatter
-        body = 'Created from lead ' + lead.name
+        body = 'Created from opportunity ' + lead.name
         task.message_post(
             body=body,
             message_type='notification'
@@ -61,15 +78,8 @@ class CrmLeadTaskWizard(models.TransientModel):
             message_type='notification'
         )
 
-        # return to task view
-        view = self.env.ref("project.view_task_form2")
-        _logger.info("View is %s", view)
-        return {
-            "name": "Task created",
-            "view_mode": "form",
-            "view_id": view.id,
-            "res_model": "project.task",
-            "type": "ir.actions.act_window",
-            "res_id": task.id,
-            "context": self.env.context,
-        }
+        return task
+
+
+
+

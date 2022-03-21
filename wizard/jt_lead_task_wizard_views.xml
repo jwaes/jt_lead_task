@@ -10,7 +10,7 @@
                     <field name="project_id" />
                 </group>
                 <footer>
-                    <button type="object" name="add_lead_task" string="Create Task" class="btn-primary" />
+                    <button type="object" name="add_lead_task_and_go" string="Create Task" class="btn-primary" />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
                 </footer>
             </form>
