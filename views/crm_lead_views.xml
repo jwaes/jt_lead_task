@@ -7,16 +7,22 @@
         <field name="groups_id" eval="[(4, ref('project.group_project_user'))]" />
         <field name="arch" type="xml">
             <xpath expr="(//div[@name='button_box'])[last()]" position="inside">
-                <button name="action_view_tasks" type="object" class="oe_stat_button" icon="fa-tasks" context="{'partner_id': partner_id}" attrs="{'invisible': [('task_count', '=', 0)]}">
+                <button name="action_view_tasks" type="object" class="oe_stat_button {{task_ready ? 'text-warning' : 'text-success'}}" icon="fa-tasks" context="{'partner_id': partner_id}" attrs="{'invisible': [('task_count', '=', 0)]}">
                     <div class="o_stat_info">
                         <field name="task_count" class="o_stat_value" />
                         <span class="o_stat_text" attrs="{'invisible': [('task_count', '&lt;', 2)]}"> Tasks</span>
                         <span class="o_stat_text" attrs="{'invisible': [('task_count', '&gt;', 1)]}"> Task</span>
                     </div>
                 </button>
+
+                <button name="action_view_tasks" type="object" class="oe_stat_button" icon="fa-tasks" context="{'partner_id': partner_id}" attrs="{'invisible': [('task_count', '=', 0)]}">
+                    <div class="o_stat_info">
+                        <field name="task_ready" class="o_stat_value" />
+                    </div>
+                </button>
             </xpath>
             <field name="stage_id" position="before">
-                <button class="oe_stat_button" type="action" name="%(jt_lead_task_wizard_add_task)d" string="Create project task" />
+                <button class="oe_stat_button" type="action" name="%(jt_lead_task_wizard_add_task)d" string="Create project task"/>
             </field>
         </field>
     </record>

@@ -12,7 +12,24 @@ class CrmLead(models.Model):
     task_ids = fields.One2many(
         'project.task', 'lead_id', string="Tasks", tracking=True)
     task_count = fields.Integer(
-        compute='_compute_task_count', string="Task Count")
+        compute='_compute_task_count')
+    task_ready = fields.Boolean(
+        compute='_compute_task_ready')
+
+    @api.depends('task_ids')
+    def _compute_task_ready(self):
+        ready = True
+        for record in self:
+            for task in self.task_ids:
+                _logger.info("Checking whether task is ready: %s : %s", task.name, task.stage_id.ready_state)
+                if task.stage_id.ready_state == False:
+                    ready = False
+                    break
+            if len(self.task_ids) == 0:
+                ready = False
+        self.task_ready = ready
+
+
 
     @api.depends('task_ids')
     def _compute_task_count(self):
@@ -60,6 +77,7 @@ class CrmLeadTask(models.Model):
     _inherit = 'project.task'
 
     lead_id = fields.Many2one('crm.lead', tracking=True)
+    quotation_ready = fields.Boolean(default=False)
 
     product_id = fields.Many2one(
         'product.product', 'Related product',
