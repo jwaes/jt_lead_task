@@ -10,10 +10,10 @@
     <button class="oe_stat_button {{task_ready ? 'text-warning' : 'text-success'}}" context="{'partner_id': partner_id}" icon="fa-tasks" invisible="task_count == 0" name="action_view_tasks" type="object">
      <div class="o_stat_info">
       <field class="o_stat_value" name="task_count"/>
-      <span class="o_stat_text" invisible="task_count < 2">
+      <span class="o_stat_text" invisible="task_count &gt; 2">
        Tasks
       </span>
-      <span class="o_stat_text" invisible="task_count > 1">
+      <span class="o_stat_text" invisible="task_count &lt; 1">
        Task
       </span>
      </div>
