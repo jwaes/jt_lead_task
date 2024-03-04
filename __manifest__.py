@@ -14,7 +14,7 @@
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Sales/CRM',
-    'version': '2.0',
+    'version': '2.1',
 
     # any module necessary for this one to work correctly
     'depends': ["crm", "project", "jt_project_assign", "jt_mrp_otf"],

@@ -4,7 +4,8 @@
  <record id="crm_lead_view_form" model="ir.ui.view">
   <field name="model">crm.lead</field>
   <field name="inherit_id" ref="crm.crm_lead_view_form"/>
-  <field eval="[(4, ref('project.group_project_user'))]" name="groups_id"/>
+  <!-- <field eval="[(4, ref('project.group_project_user'))]" name="groups_id"/> -->
+  <groups name="project.group_project_user"/>
   <field name="arch" type="xml">
    <xpath expr="(//div[@name='button_box'])[last()]" position="inside">
     <button class="oe_stat_button {{task_ready ? 'text-warning' : 'text-success'}}" context="{'partner_id': partner_id}" icon="fa-tasks" invisible="task_count == 0" name="action_view_tasks" type="object">
