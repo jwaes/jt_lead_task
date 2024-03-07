@@ -12,20 +12,15 @@
                name="action_view_tasks" type="object" groups="project.group_project_user">
                <div class="o_stat_info">
                   <field class="o_stat_value" name="task_count" />
-                  <span class="o_stat_text" invisible="task_count &gt; 2">
-                     Tasks
-                  </span>
-                  <span class="o_stat_text" invisible="task_count &lt; 1">
-                     Task
-                  </span>
+                  <span class="o_stat_text">Tasks</span>
                </div>
             </button>
-            <button class="oe_stat_button" context="{'partner_id': partner_id}" icon="fa-tasks"
+            <!-- <button class="oe_stat_button" context="{'partner_id': partner_id}" icon="fa-tasks"
                invisible="task_count == 0" name="action_view_tasks" type="object" groups="project.group_project_user">
                <div class="o_stat_info">
                   <field class="o_stat_value" name="task_ready" />
                </div>
-            </button>
+            </button> -->
          </xpath>
          <field name="stage_id" position="before">
             <button class="oe_stat_button" name="%(jt_lead_task_wizard_add_task)d"
