@@ -4,9 +4,10 @@
    <record id="crm_lead_view_form" model="ir.ui.view">
       <field name="model">crm.lead</field>
       <field name="inherit_id" ref="crm.crm_lead_view_form" />
-      <!-- <field eval="[(4, ref('project.group_project_user'))]" name="groups_id"/> -->
+
       <field name="arch" type="xml">
          <xpath expr="(//div[@name='button_box'])[last()]" position="inside">
+            <field name="task_ready" invisible="True"/>
             <button class="oe_stat_button {{task_ready ? 'text-warning' : 'text-success'}}"
                context="{'partner_id': partner_id}" icon="fa-tasks" invisible="task_count == 0"
                name="action_view_tasks" type="object" groups="project.group_project_user">
@@ -15,12 +16,6 @@
                   <span class="o_stat_text">Tasks</span>
                </div>
             </button>
-            <!-- <button class="oe_stat_button" context="{'partner_id': partner_id}" icon="fa-tasks"
-               invisible="task_count == 0" name="action_view_tasks" type="object" groups="project.group_project_user">
-               <div class="o_stat_info">
-                  <field class="o_stat_value" name="task_ready" />
-               </div>
-            </button> -->
          </xpath>
          <field name="stage_id" position="before">
             <button class="oe_stat_button" name="%(jt_lead_task_wizard_add_task)d"
