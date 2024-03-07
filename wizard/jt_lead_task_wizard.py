@@ -58,7 +58,7 @@ class CrmLeadTaskWizard(models.TransientModel):
         vals = {
             "name": task_name,
             "description": lead.description,
-            "email_from": lead.email_from,
+            # "email_from": lead.email_from,
             "project_id": self.project_id.id,
             "partner_id": partner.id,
             "user_ids": [(lead.user_id.id)],
