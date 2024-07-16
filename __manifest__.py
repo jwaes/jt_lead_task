@@ -27,7 +27,7 @@
     'data': [
         "wizard/jt_lead_task_wizard_views.xml",
         "views/crm_lead_views.xml",
-        "views/settings.xml",
+        "views/res_config_settings_views.xml",
         "views/project_task_views.xml",
         "security/ir.model.access.csv",
     ],
