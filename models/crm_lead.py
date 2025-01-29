@@ -63,7 +63,7 @@ class CrmLead(models.Model):
             # erase default context to avoid default filter
             action['context'] = {}
             if len(self.task_ids) > 1:  # cross project kanban task
-                action['views'] = [[False, 'kanban'], [list_view_id, 'tree'], [
+                action['views'] = [[False, 'kanban'], [list_view_id, 'list'], [
                     form_view_id, 'form'], [False, 'graph'], [False, 'calendar'], [False, 'pivot']]
             elif len(self.task_ids) == 1:  # single task -> form view
                 action['views'] = [(form_view_id, 'form')]
