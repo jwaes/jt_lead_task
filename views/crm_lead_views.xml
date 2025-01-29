@@ -7,7 +7,6 @@
 
       <field name="arch" type="xml">
          <xpath expr="(//div[@name='button_box'])[last()]" position="inside">
-            <field name="task_ready" invisible="True"/>
             <button class="oe_stat_button {{task_ready ? 'text-warning' : 'text-success'}}"
                context="{'partner_id': partner_id}" icon="fa-tasks" invisible="task_count == 0"
                name="action_view_tasks" type="object" groups="project.group_project_user">
