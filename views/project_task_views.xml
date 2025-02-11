@@ -14,7 +14,7 @@
         </field>
     </record>
 
-    <record id="edit_project" model="ir.ui.view">
+    <!-- <record id="edit_project" model="ir.ui.view">
         <field name="name">project.project.form</field>
         <field name="model">project.project</field>
         <field name="inherit_id" ref="jt_project_assign.edit_project" />
@@ -23,6 +23,6 @@
                 <field name="ready_state" />
             </xpath>
         </field>
-    </record>
+    </record> -->
 
 </odoo>
