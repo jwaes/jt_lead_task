@@ -13,8 +13,8 @@
             </field>
         </field>
     </record>
-
-    <!-- <record id="edit_project" model="ir.ui.view">
+<!-- 
+    <record id="edit_project" model="ir.ui.view">
         <field name="name">project.project.form</field>
         <field name="model">project.project</field>
         <field name="inherit_id" ref="jt_project_assign.edit_project" />
@@ -24,5 +24,17 @@
             </xpath>
         </field>
     </record> -->
+
+
+    <record id="task_type_tree_inherited" model="ir.ui.view">
+        <field name="name">project.task.type.view.list.inherit.project.autoassign</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_tree_inherited"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="ready_state" />
+            </field>
+        </field>
+    </record>       
 
 </odoo>
