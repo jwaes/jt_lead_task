@@ -17,7 +17,7 @@ class CrmLeadTaskWizard(models.TransientModel):
     #     return result
 
     def default_project_id(self):
-        return int(self.env['ir.config_parameter'].sudo().get_param('jt_lead_task.default_projectid'))
+        return self.env['ir.config_parameter'].sudo().get_param('jt_lead_task.default_projectid')
 
 
     lead_id = fields.Many2one(
