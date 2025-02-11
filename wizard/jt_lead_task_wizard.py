@@ -15,9 +15,9 @@ class CrmLeadTaskWizard(models.TransientModel):
         if lead_id:
             result["lead_id"] = lead_id
         return result
-
+        
     def default_project_id(self):
-        return self.env['ir.config_parameter'].sudo().get_param('jt_lead_task.default_projectid')
+        return int(self.env['ir.config_parameter'].sudo().get_param('jt_lead_task.default_projectid'))
 
 
     lead_id = fields.Many2one(
@@ -92,6 +92,9 @@ class CrmLeadTaskWizard(models.TransientModel):
 
         # create new project.task
         task_prefix = self.env['ir.config_parameter'].sudo().get_param('jt_lead_task.task_prefix')
+        if not task_prefix: # Check if task_prefix is False or None (parameter not found)
+            task_prefix = "TASK:"  # Define a default task prefix
+            _logger.warning("jt_lead_task.task_prefix system parameter not found. Using default: %s", task_prefix)
         task_name = task_prefix + ' ' + lead.name
         vals = {
             "name": task_name,
