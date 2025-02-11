@@ -8,13 +8,13 @@ class CrmLeadTaskWizard(models.TransientModel):
     _name = 'jt.lead.task.wizard'
     _description = 'Wizard to creat Lead Tasks'
 
-    # @api.model
-    # def default_get(self, fields):
-    #     result = super().default_get(fields)
-    #     lead_id = self.env.context.get("active_id")
-    #     if lead_id:
-    #         result["lead_id"] = lead_id
-    #     return result
+    @api.model
+    def default_get(self, fields):
+        result = super().default_get(fields)
+        lead_id = self.env.context.get("active_id")
+        if lead_id:
+            result["lead_id"] = lead_id
+        return result
 
     def default_project_id(self):
         return self.env['ir.config_parameter'].sudo().get_param('jt_lead_task.default_projectid')
