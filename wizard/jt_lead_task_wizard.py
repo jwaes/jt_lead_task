@@ -38,7 +38,6 @@ class CrmLeadTaskWizard(models.TransientModel):
                 product.partner_id = task.partner_id.parent_id
             else :
                 product.partner_id = task.partner_id
-            product.product_wdh = True
             task.product_id = product
             product.task_id = task
             
