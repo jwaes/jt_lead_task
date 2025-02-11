@@ -15,9 +15,25 @@ class CrmLeadTaskWizard(models.TransientModel):
         if lead_id:
             result["lead_id"] = lead_id
         return result
-        
+
     def default_project_id(self):
-        return int(self.env['ir.config_parameter'].sudo().get_param('jt_lead_task.default_projectid'))
+        # return int(self.env['ir.config_parameter'].sudo().get_param('jt_lead_task.default_projectid'))
+        project_id_str = self.env['ir.config_parameter'].sudo().get_param('jt_lead_task.default_projectid')
+        if project_id_str:
+            try:
+                project_id = int(project_id_str)
+                # Check if the project ID is actually valid (optional, but good practice)
+                if self.env['project.project'].browse(project_id).exists():
+                    return project_id
+                else:
+                    _logger.warning("jt_lead_task.default_projectid system parameter is set to an invalid project ID: %s", project_id_str)
+                    return None # Or consider raising an UserError to admin to fix config
+            except ValueError:
+                _logger.warning("jt_lead_task.default_projectid system parameter is not a valid integer: %s", project_id_str)
+                return None # Or consider raising an UserError to admin to fix config
+        else:
+            _logger.info("jt_lead_task.default_projectid system parameter is not set, using no default project.")
+            return None
 
 
     lead_id = fields.Many2one(
@@ -44,6 +60,9 @@ class CrmLeadTaskWizard(models.TransientModel):
             product.task_id = task
 
             task_prefix = self.env['ir.config_parameter'].sudo().get_param('jt_lead_task.task_prefix')
+            if not task_prefix: # Check if task_prefix is False or None (parameter not found)
+                task_prefix = "TASK:"  # Define a default task prefix
+                _logger.warning("jt_lead_task.task_prefix system parameter not found. Using default: %s", task_prefix)            
             task_name = task_prefix + ' ' + product.code
             task.name = task_name
 
