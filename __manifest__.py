@@ -19,7 +19,6 @@
     # any module necessary for this one to work correctly
     'depends': ["crm",
                 "project",
-                "jt_project_assign",
                 "jt_mrp_otf",
                 ],
 
