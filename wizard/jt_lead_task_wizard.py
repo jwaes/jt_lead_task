@@ -51,12 +51,9 @@ class CrmLeadTaskWizard(models.TransientModel):
             _logger.info("add_lead_task_and_go - Found an otf bom template for task: %s", task.id)
             bom = task.project_id.otf_bom_template_id.create_otf_bom_product()
             product = bom.product_id
-            #@TODO replace with commercial entity
-            if task.partner_id.parent_id:
-                product.partner_id = task.partner_id.parent_id
-            else:
-                product.partner_id = task.partner_id
+            product.partner_id = task.partner_id.commercial_partner_id
             task.product_id = product
+            task.product_tmpl_id = product.product_tmpl_id
             product.task_id = task
 
             task_prefix = self.env['ir.config_parameter'].sudo().get_param('jt_lead_task.task_prefix')
