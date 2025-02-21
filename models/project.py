@@ -28,3 +28,13 @@ class CrmLeadTask(models.Model):
         check_company=True, index=True,
         domain="['&',('type', 'in', ['consu']),  '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
         help="A product template that is the related to this task")        
+
+    @api.onchange('product_tmpl_id')
+    def _onchange_product_tmpl_id(self):
+        """Reset product_id or assign the first variant of the selected product_tmpl_id."""
+        if self.product_tmpl_id:
+            variants = self.product_tmpl_id.product_variant_ids
+            # Reset product_id to the first variant if available, otherwise set to False
+            self.product_id = variants and variants[0] or False
+        else:
+            self.product_id = False        
