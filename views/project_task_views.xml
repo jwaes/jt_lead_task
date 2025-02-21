@@ -10,7 +10,7 @@
             </field>
             <field name="tag_ids" position="after">
                 <field name="product_id" />
-                <field name="product_tmpl_id" invisible="product_id"/>
+                <field name="product_tmpl_id"/>
             </field>
         </field>
     </record>

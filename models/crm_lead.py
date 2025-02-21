@@ -98,8 +98,11 @@ class CrmLead(models.Model):
             for task in self.task_ids:
                 product = task.product_id
                 if product is not None:
+                    if not product.display_name:
+                        _logger.warning("Product %s, %s has no display name", product.name, product.id)
+                    _logger.info("Adding product %s to sale order", product.display_name)
                     order_line_vals = {
-                        'name': product.display_name,
+                        'name': product.display_name or 'Product name not found',
                         'order_id': sale_order.id,
                         'product_id': product.id,
                         'product_uom_qty': 1.0,

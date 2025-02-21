@@ -20,11 +20,11 @@ class CrmLeadTask(models.Model):
     product_id = fields.Many2one(
         'product.product', 'Related product variant',
         check_company=True, index=True,
-        domain="['&',('type', 'in', ['product']),  '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
+        domain="['&',('type', 'in', ['consu']),  '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
         help="A product variant that is the related to this task")
 
     product_tmpl_id = fields.Many2one(
         'product.template', 'Related product template',
         check_company=True, index=True,
-        domain="['&',('type', 'in', ['product']),  '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
+        domain="['&',('type', 'in', ['consu']),  '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
         help="A product template that is the related to this task")        
